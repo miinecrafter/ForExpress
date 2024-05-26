@@ -1,4 +1,4 @@
-import { login, getLogins, getFavnum, validateUser, signUp, updateFavnum } from './forexDB.js';
+import { login, getHistory, getFavnum, validateUser, signUp, updateFavnum } from './forexDB.js';
 import express from 'express';
 import cors from 'cors';
 const app = express();
@@ -8,24 +8,20 @@ app.use(express.json());
 const port = 3001;
 app.use(cors());
 
-app.get('/api/tshirt', async (req, res) => {
-    res.status(244).send({ message : 'Potato'});
-});
-
 app.get('/api/getUser/:username/:pass', async (req, res) => {
     console.log("get works");
     var username = req.params.username;
     var pass = req.params.pass;
 
     if(await login(username, pass)){
-        var favnum = await getFavnum(username);
-        var logins = await getLogins(username);
+        var balance = await getFavnum(username);
+        var history = await getHistory(username);
 
-        console.log(favnum + " " + logins);
+        console.log(balance + " " + history);
 
         res.status(244).send({
-            favNum : favnum,
-            numLogs : logins
+            favNum : balance,
+            numLogs : history
         });
 
     } else{

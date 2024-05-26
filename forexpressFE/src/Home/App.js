@@ -1,8 +1,9 @@
 import './App.css';
 import { useState } from 'react';
+import ChartMaker from './ChartMaker.js';
 
 
-function App() {
+export default function App() {
   const [balance, setBalance] = useState(100, (newBalance) => {
     balance = newBalance;
     console.log({balance});
@@ -10,6 +11,15 @@ function App() {
   const handleBalanceClick = e => {
     e.preventDefault();
     setBalance(balance + 100);
+  }
+  async function getStock(url){
+    const newData = await fetchData(url);
+    return newData;
+  }
+  const handleStockClick = e => {
+    e.preventDefault();
+    const newData = getStock('http://localhost:3002/api/getData/Top/tes/ter');
+    console.log(newData);
   }
 
   async function sendData(url, user, pass){
@@ -65,6 +75,7 @@ function App() {
 
       // Display the received data on the page (for demonstration purposes)
       document.getElementById('result').textContent = JSON.stringify(data, null, 2);
+      return data;
     } catch (error) {
       console.error('Error fetching data:', error);
     }
@@ -85,6 +96,7 @@ function App() {
     
     fetchData(url);
   }
+
   return (
     <div className="App">
       <form onSubmit={((e) => handleSignup(e))}>
@@ -104,10 +116,10 @@ function App() {
         <button type="submit">log in</button>
       </form>
       <button onClick={(e) => handleBalanceClick(e)}>increase balance</button>
-
+      <button onClick={(e) => handleStockClick(e)}>get last stock tester</button>
       <p>balance {balance}</p>
+      <ChartMaker />
     </div>
   );
 }
 
-export default App;

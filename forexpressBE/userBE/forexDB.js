@@ -21,10 +21,9 @@ async function main(){
 }
 
 async function testQuery(){
-  //signUp('rayaan', 'rayaan21');
-  //await updateBalance('rayaan', "USD", 10);
-  console.log("HELLO");
-  await updateHistory('rayaan', 2024, 5, 7, 2, 4, "USD", "DKK", 50);
+  // signUp('rayaan', 'rayaan21');
+  //  await updateBalance('rayaan', "USD", 10);
+  await updateHistory('rayaan', 2024, 11, 27, 20, 41, "USD", "DKK", 80);
 }
 
 /*
@@ -91,9 +90,9 @@ async function login(username, password){
 async function getBalance(username){
   try{
     const [rows, fields] = await con.execute('SELECT balance FROM data WHERE username = \'' + username + '\'');
-    console.log(rows);
-    console.log(rows[0]);
-    console.log(rows[0].balance);
+    // console.log(rows);
+    // console.log(rows[0]);
+    // console.log(rows[0].balance);
     const newRows = await rows[0].balance;
     return newRows;
   } catch(err){
@@ -116,7 +115,7 @@ async function updateBalance(username, cur, amt){
     }
 
     const newBalance = await JSON.stringify(balance);
-    console.log("NEW BALANCE : " + newBalance);
+    //console.log("NEW BALANCE : " + newBalance);
     const query = 'update data set balance = \'' + newBalance + '\' where username = \'' + username + '\'';
     console.log(query);
     await con.execute(query);
@@ -129,10 +128,12 @@ async function updateBalance(username, cur, amt){
 async function getHistory(username){
   try{
     const [rows, fields] = await con.execute('SELECT history FROM data WHERE username = \'' + username + '\'');
+    console.log(rows);
     const newHist = await rows[0].history;
+    console.log(newHist);
     return newHist;
   } catch(err){
-    console.log("ERROR : " + err);
+    console.log("ERRORSSS : " + err);
   }
 }
 
@@ -148,4 +149,4 @@ async function updateHistory(username, year, month, day, hour, minute, cur1, cur
   await con.execute(query);
 }
 
-export { login, getHistory, getBalance, validateUser, signUp, updateBalance };
+export { login, getHistory, getBalance, validateUser, signUp, updateBalance, updateHistory };

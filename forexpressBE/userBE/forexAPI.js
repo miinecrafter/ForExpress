@@ -1,4 +1,4 @@
-import { login, getHistory, getFavnum, validateUser, signUp, updateFavnum } from './forexDB.js';
+import { login, getHistory, getBalance, validateUser, signUp, updateBalance, updateHistory } from './forexDB.js';
 import express from 'express';
 import cors from 'cors';
 const app = express();
@@ -8,26 +8,21 @@ app.use(express.json());
 const port = 3001;
 app.use(cors());
 
-app.get('/api/getUser/:username/:pass', async (req, res) => {
+app.get('/api/getUser/:username', async (req, res) => {
     console.log("get works");
     var username = req.params.username;
-    var pass = req.params.pass;
 
-    if(await login(username, pass)){
-        var balance = await getFavnum(username);
-        var history = await getHistory(username);
+    var balance = await getBalance(username);
+    var history = await getHistory(username);
 
-        console.log(balance + " " + history);
+    console.log(history);
 
-        res.status(244).send({
-            favNum : balance,
-            numLogs : history
-        });
-
-    } else{
-        // tell the user authentication failed
-        res.status(410).send({message : "Authentication failed."})
-    }
+    //console.log("DATA : ")
+    //console.log(balance + " " + history);
+    res.status(244).send({
+        balance : balance,
+        history : history
+    });
 });
 
 app.post('/api/signUser', async (req, res) => {

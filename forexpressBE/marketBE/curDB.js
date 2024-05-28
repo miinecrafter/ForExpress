@@ -91,6 +91,7 @@ async function getData(cur1, cur2, numEntries, dif){
     for(var i = 0; i < numEntries && i * dif + 1 <= size; i++){
         var rowData = await getIndexFromTop(cur1, cur2, 1 + i * dif);
         data.push(rowData[0][0]);
+        console.log(data);
     }
     return data;
 }

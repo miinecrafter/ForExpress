@@ -77,5 +77,4 @@ export default function App({ username }) {
       </div>
     );
   }
-  
 }

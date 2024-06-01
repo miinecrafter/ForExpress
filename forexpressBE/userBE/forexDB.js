@@ -23,7 +23,7 @@ async function main(){
 async function testQuery(){
   // signUp('rayaan', 'rayaan21');
   //  await updateBalance('rayaan', "USD", 10);
-  await updateHistory('rayaan', 2024, 11, 27, 20, 41, "USD", "DKK", 80);
+  // await updateHistory('rayaan', 2024, 11, 27, 20, 41, "USD", "DKK", 80);
 }
 
 /*
@@ -104,21 +104,37 @@ async function updateBalance(username, cur, amt){
     var balance = await getBalance(username);
     //balance = "\'" + balance + "\'";
     balance = JSON.parse(balance);
+    cur = cur.toUpperCase();
+    var res = "";
 
     console.log("BALANCE : " + balance);
     console.log(balance[0][0] + " ABC " + balance[0][1]);
 
     for(var i = 0; i < balance.length; i++){
+      console.log(cur + " / " + balance.at(i).at(0));
       if(cur == balance.at(i).at(0)){
-        balance[i][1] += amt;
+        console.log("MADE IT : " + balance[i][1] + " / " + amt);
+
+        if(balance[i][1] + amt >= 0){
+          balance[i][1] += amt;
+          res = "success";
+        }
+        else{
+          res = "not enough currency"
+        }
       }
     }
+
+    console.log(username + " / " + cur + " / " + amt);
 
     const newBalance = await JSON.stringify(balance);
     //console.log("NEW BALANCE : " + newBalance);
     const query = 'update data set balance = \'' + newBalance + '\' where username = \'' + username + '\'';
     console.log(query);
+
     await con.execute(query);
+
+    return res;
 }
 
 /*

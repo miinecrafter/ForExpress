@@ -1,0 +1,27 @@
+*{border: 0; margin: 0;}
+
+.App{
+  background-color: rgb(50, 50, 60);
+  width: 100vw;
+  height: 100vh;
+}
+
+.top-bar{
+  background-color: rgb(40, 40, 40);
+  width: 100vw;
+}
+
+.signup, .login{
+  height: 3vh;
+  width: 5vw;
+  margin: 10px;
+  border: none;
+  background-color: rgb(50, 50, 40);
+  color: rgb(200, 200, 200);
+  font-weight: 700;
+  border-radius: 6px;
+}
+
+.enter{
+  margin-left: 85vw;
+}

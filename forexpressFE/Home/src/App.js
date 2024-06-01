@@ -8,6 +8,34 @@ export default function App() {
     balance = newBalance;
     console.log({balance});
   });
+  const [time, setTime] = useState("NowData");
+  const [cur1, setCur1] = useState();
+  const [cur2, setCur2] = useState();
+
+  const handleBuy = async e => {
+
+    console.log("handling buy");
+
+    e.preventDefault();
+    var cur1 = document.getElementById('curOne').value;
+    var cur2 = document.getElementById('curTwo').value;
+    var amt = document.getElementById('newAmount').value;
+
+    console.log(cur1 + " / " + cur2 + " / " + amt);
+
+    var url = 'http://localhost:3001/api/updateBalance/rayaan/' + cur1 + '/' + amt + '/buy';
+    console.log(url);
+    var response = await fetch(url);
+
+    url = 'http://localhost:3001/api/updateBalance/rayaan/' + cur2 + '/' + amt + '/sell';
+    console.log(url);
+    response = await fetch(url);
+
+    const stat = response.json();
+    if(stat.message == "success") console.log("success");
+    else console.log("Not enough money in wallet");
+  }
+
   const handleBalanceClick = e => {
     e.preventDefault();
     setBalance(balance + 100);
@@ -20,47 +48,6 @@ export default function App() {
     e.preventDefault();
     const newData = getStock('http://localhost:3002/api/getData/Top/tes/ter');
     console.log(newData);
-  }
-
-  async function sendData(url, user, pass){
-
-    console.log("sending data...");
-
-    try {
-      // Send the GET request using fetch
-      const response = await fetch(url, {
-        method: "POST",
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          username : user,
-          password : pass
-        })
-      });
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      const data = await response.json();
-      console.log('Data received:', data);
-
-      // Display the received data on the page (for demonstration purposes)
-      document.getElementById('result').textContent = JSON.stringify(data, null, 2);
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    }
-  }
-
-  const handleSignup = (e) => {
-    console.log("inside sign up");
-
-    e.preventDefault();
-    var username = document.getElementById('newuname').value;
-    var password = document.getElementById('newpword').value;
-
-    const url = "http://localhost:3001/api/signUser";
-
-    sendData(url, username, password);
   }
 
   async function fetchData(url) {
@@ -97,28 +84,41 @@ export default function App() {
     fetchData(url);
   }
 
+  const handlePriceChange = (e, time) => {
+    console.log("Requested time change : " + time);
+    setTime(time);
+  }
+
   return (
     <div className="App">
-      <form onSubmit={((e) => handleSignup(e))}>
-        <p>sign up</p> <br />
-        <label htmlFor="newuname">Uname</label>
-        <input type="text" placeholder="works1" id="newuname" name="newUsername"></input> <br />
-        <label htmlFor="newpword">pword</label>
-        <input type="text" placeholder="works1" id="newpword" name="newPassword"></input> <br />
-        <button type="submit">sign up</button>
-      </form>
-      <form onSubmit={(e) => handleLogin(e)}>
-        <p>log in</p> <br />
-        <label htmlFor="uname">Uname</label>
-        <input type="text" placeholder="works1" id="uname" name="username"></input> <br />
-        <label htmlFor="pword">pword</label>
-        <input type="text" placeholder="works1" id="pword" name="password"></input> <br />
-        <button type="submit">log in</button>
-      </form>
       <button onClick={(e) => handleBalanceClick(e)}>increase balance</button>
       <button onClick={(e) => handleStockClick(e)}>get last stock tester</button>
+
+      <button onClick={(e) => handlePriceChange(e, "NowData")}>Now</button>
+      <button onClick={(e) => handlePriceChange(e, "DayData")}>Day</button>
+      <button onClick={(e) => handlePriceChange(e, "WeekData")}>Week</button>
+      <button onClick={(e) => handlePriceChange(e, "MonthData")}>Month</button>
+      <button onClick={(e) => handlePriceChange(e, "YearData")}>Year</button>
+      <button onClick={(e) => handlePriceChange(e, "FiveYearsData")}>5 Years</button>
+
+
+      <p>Buy amount</p>
+      <label htmlFor="currency1">cur1</label>
+      <input type="text" placeholder="works1" id="curOne" name="curOne"></input> <br />
+
+
+      <label htmlFor="currency2">cur2</label>
+      <input type="text" placeholder="works1" id="curTwo" name="curTwo"></input> <br />
+
+
+      <label htmlFor="amount">amt</label>
+      <input type="text" placeholder="works1" id="newAmount" name="newAmount"></input> <br />
+
+      <button onClick={(e) => handleBuy(e)}>Confirm</button>
+
+
       <p>balance {balance}</p>
-      <ChartMaker />
+      <ChartMaker time={time} cur1={"tes"} cur2={"ter"} />
     </div>
   );
 }

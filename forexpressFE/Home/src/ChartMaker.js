@@ -1,16 +1,19 @@
 import NewChart from './NewChart.js';
-import fetchData from './App.js';
 import React from 'react';
 import './ChartMaker.css'
 import {useState, useEffect, useRef} from 'react';
+import { INFINITY } from 'chart.js/helpers';
 
-export default function ChartMaker(){
+export default function ChartMaker({time, cur1, cur2}){
     const [pot, setPot] = useState();
     const [label, setLabel] = useState([1, 2, 3, 4, 5]);
     const [data, setData] = useState([2, 4, 6, 8, 10]);
+    const [lineColor, setLineColor] = useState('rgba(0, 0, 255, 1)');
+    const [low, setLow] = useState(INFINITY);
+    const [high, setHigh] = useState(0);
 
     const fetchHistory = async () => {
-        const url = `http://localhost:3002/api/getData/NowData/usd/dkk`;
+        const url = `http://localhost:3002/api/getData/${time}/${cur1}/${cur2}`;
         console.log(url);
         const response = await fetch(url);
         if (!response.ok) {
@@ -39,12 +42,43 @@ export default function ChartMaker(){
         console.log(newData);
         await setLabel(labels);
         await setData(newData);
+
+        if(newData[0] <= newData[newData.length - 1]){
+            setLineColor('rgba(0,255,0,1)')
+        } else{
+            setLineColor('rgba(255,0,0,1)')
+        }
+
+        var highT = 0, lowT = INFINITY;
+
+        for(var i = 0; i < newData.length; i++){
+            if(newData[i] > highT){
+                highT = newData[i];
+                console.log("HIGHER THAN HIGH : " + newData[i] + " - " + highT);
+            }
+            else{
+                console.log("LOWER THAN HIGH : " + newData[i] + " - " + highT);
+            }
+            if(newData[i] < lowT){
+                lowT = newData[i];
+                console.log("LOWER THAN LOW : " + newData[i] + " - " + lowT);
+            }
+            else{
+                console.log("HIGHER THAN LOW : " + newData[i] + " - " + lowT);
+            }
+        }
+
+        setHigh(highT);
+        setLow(lowT);
+
+        console.log(high + " : " + low);
+
         console.log("test:" + labels + " " + newData);
     };
 
     useEffect(() => {
         fetchHistory();
-    }, []);
+    }, [time, cur1, cur2]);
 
     useEffect(() => {
         setChartData({
@@ -53,7 +87,7 @@ export default function ChartMaker(){
                 {
                     label: 'My First dataset',
                     backgroundColor: 'rgba(30, 30, 30 0.8)',
-                    borderColor: 'rgba(255,99,132,1)',
+                    borderColor: lineColor,
                     borderWidth: 2,
                     hoverBackgroundColor: 'rgba(255,99,132,0.4)',
                     hoverBorderColor: 'rgba(255,99,132,1)',
@@ -61,7 +95,7 @@ export default function ChartMaker(){
                 },
             ],
         });
-    }, [data, label]);
+    }, [data, label, time, cur1, cur2]);
 
     const [chartData, setChartData] = useState({
         labels: label,
@@ -69,9 +103,9 @@ export default function ChartMaker(){
           {
             label: 'My First dataset',
             backgroundColor: 'rgba(30, 30, 30 0.8)',
-            borderColor: 'rgba(255,99,132,1)',
+            borderColor: 'rgba(0,255,0,1)',
             borderWidth: 1,
-            hoverBackgroundColor: 'rgba(255,99,132,0.4)',
+            hoverBackgroundColor: 'rgba(255,0,0,0.4)',
             hoverBorderColor: 'rgba(255,99,132,1)',
             data: data,
           },
@@ -85,7 +119,11 @@ export default function ChartMaker(){
     
     return (
         <div id="chartContainer">
-            <NewChart data={chartData} options={chartOptions} />
+            <NewChart data={chartData} options={chartOptions}/>
+            <div id="chartMeta">
+                <p>High : {high}</p>
+                <p>Low : {low}</p>
+            </div>
         </div>
     );
 }

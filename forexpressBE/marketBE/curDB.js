@@ -56,7 +56,7 @@ async function main(){
 }                            
 
 async function insertPrice(year, month, day, hour, minute, price, cur1, cur2){
-    console.log('insert into ' + cur1 + cur2 + ' (year,month,day,hour,minute,price) values (\'' + year + '\',' + '\'' + month + '\',' + '\'' + day + '\',' + '\'' + hour + '\',' + '\'' + minute + '\',' + '\'' + price + '\')');
+    //console.log('insert into ' + cur1 + cur2 + ' (year,month,day,hour,minute,price) values (\'' + year + '\',' + '\'' + month + '\',' + '\'' + day + '\',' + '\'' + hour + '\',' + '\'' + minute + '\',' + '\'' + price + '\')');
     await con.execute('insert into ' + cur1 + cur2 + ' (year,month,day,hour,minute,price) values (\'' + year + '\',' + '\'' + month + '\',' + '\'' + day + '\',' + '\'' + hour + '\',' + '\'' + minute + '\',' + '\'' + price + '\')');
 }
 
@@ -81,7 +81,7 @@ async function getIndexFromTop(cur1, cur2, indexFromTop){
         return topPrice;
     }
     else{
-        console.log("This index is less than 1");
+        //console.log("This index is less than 1");
     }
 }
 
@@ -91,7 +91,7 @@ async function getData(cur1, cur2, numEntries, dif){
     for(var i = 0; i < numEntries && i * dif + 1 <= size; i++){
         var rowData = await getIndexFromTop(cur1, cur2, 1 + i * dif);
         data.push(rowData[0][0]);
-        console.log(data);
+        //console.log(data);
     }
     return data;
 }
@@ -118,4 +118,4 @@ async function getFiveYearsData(cur1, cur2){
     return await getData(cur1, cur2, 60, 43200);
 }
 
-export { insertPrice, getTop, getNowData, getDayData, getWeekData, getMonthData, getYearData, getFiveYearsData };
+export { insertPrice, getTop, getNowData, getDayData, getWeekData, getMonthData, getYearData, getFiveYearsData, currencyComparisons };

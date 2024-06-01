@@ -1,0 +1,24 @@
+p{
+    font-family: sans-serif;
+    color: white;
+}
+.pair{
+    background-color: rgb(10, 10, 10);
+}
+
+.meta{
+    display: inline-block;
+    font-size: 2.7em;
+    margin-left: 5vw;
+}
+
+.chart{
+    display: inline-block;
+}
+
+.line{
+    height: 0.3vh;
+    background-color: rgb(70, 70, 70);
+    border-radius: 1px;
+    width: 80wv;
+}

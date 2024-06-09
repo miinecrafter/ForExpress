@@ -100,7 +100,7 @@ async function getTop(cur1, cur2){
     return await getData(cur1, cur2, 1, 1);
 }
 async function getNowData(cur1, cur2){
-    return await getData(cur1, cur2, 60, 1);
+    return await getData(cur1, cur2, 180, 2);
 }
 async function getDayData(cur1, cur2){
     return await getData(cur1, cur2, 24, 60);

@@ -85,44 +85,54 @@ export default function ChartMaker({time, cur1, cur2}){
             labels: label,
             datasets: [
                 {
-                    label: 'My First dataset',
                     backgroundColor: 'rgba(30, 30, 30 0.8)',
                     borderColor: lineColor,
                     borderWidth: 2,
-                    hoverBackgroundColor: 'rgba(255,99,132,0.4)',
-                    hoverBorderColor: 'rgba(255,99,132,1)',
                     data: data,
+                    pointRadius: 0,
+                    pointHoverRadius: 0
                 },
             ],
         });
     }, [data, label, time, cur1, cur2]);
 
     const [chartData, setChartData] = useState({
-        labels: label,
-        datasets: [
-          {
-            label: 'My First dataset',
-            backgroundColor: 'rgba(30, 30, 30 0.8)',
-            borderColor: 'rgba(0,255,0,1)',
-            borderWidth: 1,
-            hoverBackgroundColor: 'rgba(255,0,0,0.4)',
-            hoverBorderColor: 'rgba(255,99,132,1)',
-            data: data,
-          },
-        ],
-      });
+            labels: label,
+            datasets: [
+                {
+                    backgroundColor: 'rgba(30, 30, 30 0.8)',
+                    borderColor: lineColor,
+                    borderWidth: 2,
+                    data: data,
+                    pointRadius: 0,
+                    pointHoverRadius: 0
+                },
+            ],
+        });
     
       const [chartOptions, setChartOptions] = useState({
         responsive: false,
         maintainAspectRatio: false,
+        scales: {
+            x:{
+                display: false
+            }
+        },
+        plugins: {
+            legend: {
+                display: false
+            }
+        }
       });
     
     return (
         <div id="chartContainer">
-            <NewChart data={chartData} options={chartOptions}/>
             <div id="chartMeta">
-                <p>High : {high}</p>
-                <p>Low : {low}</p>
+                <p className="hi">High : {high}</p>
+                <p className="lo">Low : {low}</p>
+            </div>
+            <div className="chart">
+                <NewChart data={chartData} options={chartOptions} />
             </div>
         </div>
     );

@@ -1,4 +1,18 @@
 #chartContainer{
-    border: 1px solid blue;
+    margin-top: 20vh;
     padding: 3vh;
+}
+.lo, .hi{
+    font-size: 5em;
+    margin-left: 10vw;
+}
+.lo{
+    margin-top: 10vh;
+}
+.hi{
+    margin-top: 5vh;
+}
+.chart{
+    margin-left: 50vw;
+    margin-top: -35vh;
 }

@@ -28,7 +28,7 @@ const NewChart = ({data, options}) => {
     }, [data, options]);
     return (
         <div>
-            <canvas ref={chartRef} id="testGraph" width="200" height="100" />
+            <canvas ref={chartRef} id="testGraph" width="400" height="200" />
         </div>
     );
 }

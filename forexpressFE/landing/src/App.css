@@ -1,27 +1,106 @@
-*{border: 0; margin: 0;}
+*{
+  border: 0; margin: 0;
+  font-family: sans-serif;
+  color: white;
+}
+.top-image{
+  position: absolute;
+  height: 100vh;
+  width: 100vw;
+  z-index: 0;
+}
 
 .App{
-  background-color: rgb(50, 50, 60);
+  background: linear-gradient(0deg, rgb(100, 100, 100) 20%, rgb(50, 50, 50) 55%);
   width: 100vw;
-  height: 100vh;
+  padding-bottom: 10vh;
 }
 
 .top-bar{
   background-color: rgb(40, 40, 40);
   width: 100vw;
 }
-
-.signup, .login{
-  height: 3vh;
-  width: 5vw;
-  margin: 10px;
-  border: none;
-  background-color: rgb(50, 50, 40);
-  color: rgb(200, 200, 200);
-  font-weight: 700;
-  border-radius: 6px;
+.call{
+  position: absolute;
+  font-size: 4em;
+  font-weight: bold;
+  margin-left: 5vw;
+  margin-top: 30vh;
+}
+.main-title{
+  font-size: 10em;
+  font-weight: 600;
+  margin-left: 5vw;
+  margin-top: 10vh;
+  margin-bottom: 7vh;
 }
 
-.enter{
-  margin-left: 85vw;
+.main-desc{
+  font-size: 2em;
+  margin-left: 5vw;
+  margin-top: 3vh;
+  font-weight: bold;
+}
+
+.image-stack{
+  position: absolute;
+  margin-left: 50vw;
+  margin-top: -25vh;
+}
+.stack{
+  border-radius: 8px;
+  position: absolute;
+  width: 40vw;
+  height: 20vw;
+  border: 5px solid rgb(50, 50, 50);
+}
+.audcad{
+  z-index: 3;
+}
+.chfcnh{
+  z-index: 2;
+  margin-top: 4vh;
+  margin-left: 2vw;
+}
+.usddkk{
+  z-index: 1;
+  margin-top: 8vh;
+  margin-left: 4vw;
+}
+
+.sec-section{
+  width: 90vw;
+  margin-top: 50vh;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: rgb(60, 60, 60);
+  border-radius: 20px;
+  filter: drop-shadow(0 0 0.75rem rgb(20, 20, 20));
+}
+.sub-cont{
+  margin-top: 3vh;
+  padding: 3vh;
+}
+.sub-title{
+  margin-top: 3vh;
+  font-size: 4em;
+  text-align: center;
+  margin-bottom: 3vh;
+}
+
+.center{
+  display: flex;
+  justify-content: center;
+}
+
+.grid-sec{
+  padding: 0.5vw;
+  margin-top: 25vh;
+  width: 70vw;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: rgb(70, 70, 70);
+  display: grid;
+  grid-template-columns: auto auto;
+  border-radius: 20px;
 }

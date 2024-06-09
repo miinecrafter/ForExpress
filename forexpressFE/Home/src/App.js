@@ -46,7 +46,7 @@ export default function App() {
   }
   const handleStockClick = e => {
     e.preventDefault();
-    const newData = getStock('http://localhost:3002/api/getData/Top/tes/ter');
+    const newData = getStock('http://localhost:3002/api/getData/Top/' + cur1 + '/' + cur2);
     console.log(newData);
   }
 
@@ -91,34 +91,36 @@ export default function App() {
 
   return (
     <div className="App">
-      <button onClick={(e) => handleBalanceClick(e)}>increase balance</button>
-      <button onClick={(e) => handleStockClick(e)}>get last stock tester</button>
-
-      <button onClick={(e) => handlePriceChange(e, "NowData")}>Now</button>
-      <button onClick={(e) => handlePriceChange(e, "DayData")}>Day</button>
-      <button onClick={(e) => handlePriceChange(e, "WeekData")}>Week</button>
-      <button onClick={(e) => handlePriceChange(e, "MonthData")}>Month</button>
-      <button onClick={(e) => handlePriceChange(e, "YearData")}>Year</button>
-      <button onClick={(e) => handlePriceChange(e, "FiveYearsData")}>5 Years</button>
+      <div className="buy">
+        <p className="title-text">Buy currency</p>
+        <label htmlFor="currency1">Base currency    </label>
+        <input type="text" placeholder="Enter Base" id="curOne" name="curOne"></input> <br />
 
 
-      <p>Buy amount</p>
-      <label htmlFor="currency1">cur1</label>
-      <input type="text" placeholder="works1" id="curOne" name="curOne"></input> <br />
+        <label htmlFor="currency2">Quote Currency   </label>
+        <input type="text" placeholder="Enter Quote" id="curTwo" name="curTwo"></input> <br />
 
 
-      <label htmlFor="currency2">cur2</label>
-      <input type="text" placeholder="works1" id="curTwo" name="curTwo"></input> <br />
+        <label htmlFor="amount">Amount    </label>
+        <input type="text" placeholder="Enter Amount" id="newAmount" name="newAmount"></input> <br />
 
-
-      <label htmlFor="amount">amt</label>
-      <input type="text" placeholder="works1" id="newAmount" name="newAmount"></input> <br />
-
-      <button onClick={(e) => handleBuy(e)}>Confirm</button>
-
-
-      <p>balance {balance}</p>
-      <ChartMaker time={time} cur1={"tes"} cur2={"ter"} />
+        <button onClick={(e) => handleBuy(e)} className="confirm-button">Confirm</button>
+      </div>
+      <div className="curs">
+        <p>CHF / CNH</p>
+      </div>
+      <div class="chart-ops">
+        <div className="buttons">
+          <button onClick={(e) => handlePriceChange(e, "NowData")}>Now</button>
+          <button onClick={(e) => handlePriceChange(e, "DayData")}>Day</button>
+          <button onClick={(e) => handlePriceChange(e, "WeekData")}>Week</button>
+          <button onClick={(e) => handlePriceChange(e, "MonthData")}>Month</button>
+          <button onClick={(e) => handlePriceChange(e, "YearData")}>Year</button>
+        </div>
+        <div className="chart-maker">
+          <ChartMaker time={time} cur1={"CHF"} cur2={"CNH"} />
+        </div>
+      </div>
     </div>
   );
 }

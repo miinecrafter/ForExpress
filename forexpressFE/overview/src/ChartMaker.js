@@ -132,7 +132,7 @@ export default function ChartMaker({time, cur1, cur2}){
     
     return (
         <div id="chartContainer">
-            <NewChart data={chartData} options={chartOptions} />
+            <NewChart data={chartData} options={chartOptions} className="chart" />
             <div id="chartMeta">
                 <p>High : {high}</p>
                 <p>Low : {low}</p>

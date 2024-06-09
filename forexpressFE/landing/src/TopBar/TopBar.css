@@ -1,0 +1,25 @@
+*{
+    border: 0; margin: 0;
+    font-family: sans-serif;
+}
+.signup, .login{
+    height: 3vh;
+    width: 5vw;
+    margin: 10px;
+    border: none;
+    background-color: rgb(50, 50, 40);
+    color: rgb(200, 200, 200);
+    font-weight: 700;
+    border-radius: 6px;
+  }
+  
+  .enter{
+    margin-left: 85vw;
+  }
+  .topbar-title{
+    position: absolute;
+    color: white;
+    font-weight: 600;
+    margin-left: 1vw;
+    margin-top: 1.5vh;
+  }

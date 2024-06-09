@@ -28,14 +28,16 @@ function Pair({cur1, cur2}){
         //console.log("overall final : " + currentPrice);
     }, [cur1, cur2]);
     return(
-        <div className="pair">
+        <a href="https://www.w3schools.com">
+          <div className="pair">
             <div className="meta">
                 <p>{cur1} / {cur2}</p>
                 <p>Price : {currentPrice}</p>
             </div>
-            <ChartMaker time={"NowData"} cur1={cur1} cur2={cur2} className="chart" />
+                <ChartMaker time={"NowData"} cur1={cur1} cur2={cur2} className="chart" />
             <div className="line"></div>
-        </div>
+          </div>
+        </a>
     );
 }
 export default Pair;

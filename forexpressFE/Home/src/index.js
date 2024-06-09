@@ -6,6 +6,6 @@ import App from './App.js';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <App cur1={"AUD"} cur2={"CAD"} />
   </React.StrictMode>
 );

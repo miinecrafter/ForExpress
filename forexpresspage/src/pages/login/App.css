@@ -1,0 +1,80 @@
+*{border: 0; margin: 0;}
+
+.login-total{
+  background-color: rgb(20, 20, 20);
+  width: 99vw;
+  height: 100vh;
+  display: flex;
+  justify-content: space-around;
+}
+
+.login-half{
+  background-color: rgb(50, 50, 60);
+  width: 50vw;
+  height: 100vh;
+}
+
+.error-text{
+  color: red;
+}
+
+.login-cont{
+  font-size: 1vw;
+  padding-left: 2.5vw;
+  padding-right: 2.5vw;
+  display: inline-block;
+  margin-top: 15vh;
+  margin-left: 10vw;
+  background-color: rgb(40, 40, 40);
+  height: 70vh;
+  width: 25vw;
+  border-radius: 20px;
+}
+
+.login-text{
+  margin-bottom: 3vh;
+  font-size: 3em;
+  color: white;
+  text-align: center;
+  margin-top: 4vh;
+  font-family: sans-serif;
+  font-weight: 600;
+  margin-bottom: 3vh;
+}
+
+.uname, .pword{
+  display: inline-block;
+  font-family: sans-serif;
+  color: white;
+  font-size: 1.5em;
+  margin-top: 4vh;
+  margin-bottom: 3vh;
+}
+
+.uname-text, .pword-text{
+  margin-bottom: 5vh;
+  color: white;
+  width: 20vw;
+  height: 4vh;
+  text-indent: 0.5vw;
+  border-radius: 5px;
+  background-color: rgb(20, 20, 20);
+}
+
+.login-button{
+  margin-top: 2.5vh;
+  border: none;
+  color: white;
+  font-weight: 550;
+  width: 10vh;
+  height: 5vh;
+  border-radius: 5px;
+  background-color: rgb(20, 20, 20);
+  margin-left: 16vw;
+}
+
+.stock{
+  width: 46vw;
+  height: auto;
+  max-width: 100%;
+}
